@@ -31,8 +31,8 @@ from pathlib import Path
 def load_dataset():
     script_dir = Path(__file__).resolve().parent
     candidate_files = [
-        script_dir / "job_title_des.csv",
-        script_dir / "job_descriptions.csv",
+        script_dir / "data" / "job_title_des.csv",
+        script_dir / "data" / "job_descriptions.csv",
     ]
     for csv_path in candidate_files:
         if csv_path.exists():

@@ -22,11 +22,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TRAINING_FILE = "training_set.jsonl"
-VALIDATION_FILE = "validation_set.jsonl"
+_DIR = Path(__file__).resolve().parent
+TRAINING_FILE = _DIR / "training_set.jsonl"
+VALIDATION_FILE = _DIR / "validation_set.jsonl"
 
 for required_file in [TRAINING_FILE, VALIDATION_FILE]:
-    if not Path(required_file).exists():
+    if not required_file.exists():
         raise FileNotFoundError(
             f"Required file not found: {required_file}\n"
             "Create your training and validation JSONL files before running this script.\n"

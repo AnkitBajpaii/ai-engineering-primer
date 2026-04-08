@@ -125,55 +125,55 @@ The scripts are numbered in the order they should be studied. Each one introduce
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 1 | [1.hello_world.py](1.hello_world.py) | First API call | How to call `chat.completions.create`, pass a system + user message, and read the response |
-| 2 | [2.model_list.py](2.model_list.py) | Available models | How to list all models available to your API key |
-| 3 | [3.print_completion_stats.py](3.print_completion_stats.py) | Completion metadata | Token usage, finish reason, system fingerprint, JSON response format, and the `seed` parameter for reproducibility |
-| 4 | [4.sentiment_analyzer.py](4.sentiment_analyzer.py) | Prompt engineering | How to frame a task in the system prompt and parse a controlled single-word response; interactive CLI loop pattern |
-| 5 | [5.multi_turn_chatbot.py](5.multi_turn_chatbot.py) | Conversation history | How to maintain a growing message list for multi-turn dialogue; tracking cumulative token usage |
+| 1 | [1.hello_world.py](part1_openai_basics/1.hello_world.py) | First API call | How to call `chat.completions.create`, pass a system + user message, and read the response |
+| 2 | [2.model_list.py](part1_openai_basics/2.model_list.py) | Available models | How to list all models available to your API key |
+| 3 | [3.print_completion_stats.py](part1_openai_basics/3.print_completion_stats.py) | Completion metadata | Token usage, finish reason, system fingerprint, JSON response format, and the `seed` parameter for reproducibility |
+| 4 | [4.sentiment_analyzer.py](part1_openai_basics/4.sentiment_analyzer.py) | Prompt engineering | How to frame a task in the system prompt and parse a controlled single-word response; interactive CLI loop pattern |
+| 5 | [5.multi_turn_chatbot.py](part1_openai_basics/5.multi_turn_chatbot.py) | Conversation history | How to maintain a growing message list for multi-turn dialogue; tracking cumulative token usage |
 
 ### Part 2 — Embeddings
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 6 | [6.embedding_sample.py](6.embedding_sample.py) | OpenAI Embeddings API | How to generate embeddings for text pairs and compute cosine similarity using `text-embedding-3-small` |
-| 12 | [12.embedding_similarity.py](12.embedding_similarity.py) | Similarity metrics | Manual comparison of euclidean distance, cosine similarity, and dot product on fixed vectors using `scikit-learn` and `numpy` |
+| 6 | [6.embedding_sample.py](part2_embeddings/6.embedding_sample.py) | OpenAI Embeddings API | How to generate embeddings for text pairs and compute cosine similarity using `text-embedding-3-small` |
+| 12 | [12.embedding_similarity.py](part2_embeddings/12.embedding_similarity.py) | Similarity metrics | Manual comparison of euclidean distance, cosine similarity, and dot product on fixed vectors using `scikit-learn` and `numpy` |
 
 ### Part 3 — Fine-Tuning
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 7 | [7.submit_fine_tuning.py](7.submit_fine_tuning.py) | Fine-tuning pipeline | Validating a JSONL training dataset, uploading files via the Files API, and submitting a fine-tuning job |
-| 8 | [8.use_fine_tuned_model.py](8.use_fine_tuned_model.py) | Using a fine-tuned model | Retrieving job status, checking if the model is ready, and running inference on the fine-tuned model |
+| 7 | [7.submit_fine_tuning.py](part3_fine_tuning/7.submit_fine_tuning.py) | Fine-tuning pipeline | Validating a JSONL training dataset, uploading files via the Files API, and submitting a fine-tuning job |
+| 8 | [8.use_fine_tuned_model.py](part3_fine_tuning/8.use_fine_tuned_model.py) | Using a fine-tuned model | Retrieving job status, checking if the model is ready, and running inference on the fine-tuned model |
 
 ### Part 4 — Error Handling & Robustness
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 9 | [9.api_error_handling.py](9.api_error_handling.py) | API error handling | Catching `RateLimitError`, `APIConnectionError`, and `APIError` in the correct order (specific before general) |
+| 9 | [9.api_error_handling.py](part4_error_handling/9.api_error_handling.py) | API error handling | Catching `RateLimitError`, `APIConnectionError`, and `APIError` in the correct order (specific before general) |
 
 ### Part 5 — Practical Applications
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 10 | [10.ai_tweet_creator.py](10.ai_tweet_creator.py) | Creative generation | Using the `temperature` parameter to control creativity; style-guided content generation |
-| 11 | [11.ai_chat_support_system.py](11.ai_chat_support_system.py) | Domain-specific chatbot | Embedding business knowledge in the system prompt to build a scoped support bot |
+| 10 | [10.ai_tweet_creator.py](part5_practical_apps/10.ai_tweet_creator.py) | Creative generation | Using the `temperature` parameter to control creativity; style-guided content generation |
+| 11 | [11.ai_chat_support_system.py](part5_practical_apps/11.ai_chat_support_system.py) | Domain-specific chatbot | Embedding business knowledge in the system prompt to build a scoped support bot |
 
 ### Part 6 — BERT & Local NLP (No OpenAI)
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 13 | [13.bert_sample.py](13.bert_sample.py) | BERT embeddings | Text preprocessing (tokenization, stop word removal, lemmatization) and generating BERT CLS embeddings using HuggingFace Transformers |
-| 14 | [14.find_matching_jobs.py](14.find_matching_jobs.py) | Semantic search | Building a semantic job search engine: pre-computing BERT embeddings for a dataset and ranking results by cosine similarity |
-| 15 | [15.semantic_job_search_using_chromadb.py](15.semantic_job_search_using_chromadb.py) | Vector database | Replacing the manual BERT + cosine loop with ChromaDB: auto-embedding via SentenceTransformer, HNSW index for fast search, and metadata-aware querying |
+| 13 | [13.bert_sample.py](part6_bert_local_nlp/13.bert_sample.py) | BERT embeddings | Text preprocessing (tokenization, stop word removal, lemmatization) and generating BERT CLS embeddings using HuggingFace Transformers |
+| 14 | [14.find_matching_jobs.py](part6_bert_local_nlp/14.find_matching_jobs.py) | Semantic search | Building a semantic job search engine: pre-computing BERT embeddings for a dataset and ranking results by cosine similarity |
+| 15 | [15.semantic_job_search_using_chromadb.py](part6_bert_local_nlp/15.semantic_job_search_using_chromadb.py) | Vector database | Replacing the manual BERT + cosine loop with ChromaDB: auto-embedding via SentenceTransformer, HNSW index for fast search, and metadata-aware querying |
 
 ### Part 7 — LangChain & Groq
 
 | # | File | Concept | Key Takeaway |
 |---|------|---------|--------------|
-| 16 | [16.langchain_multi_turn_chatbot.py](16.langchain_multi_turn_chatbot.py) | Multi-turn chatbot | How to maintain conversation history with `SystemMessage`, `HumanMessage`, `AIMessage` using LangChain + Groq instead of the raw OpenAI SDK |
-| 17 | [17.langchain_prompt_template.py](17.langchain_prompt_template.py) | Prompt templates | How `PromptTemplate` separates prompt structure from data — define once, invoke with different inputs |
-| 18 | [18.langchain_output_parsers.py](18.langchain_output_parsers.py) | Output parsers | Parsing raw LLM text into typed Python objects: `datetime`, `list`, Pydantic model, and `with_structured_output` |
-| 19 | [19.langchain_feedback_processing_system.py](19.langchain_feedback_processing_system.py) | LCEL chains | Composing multi-step pipelines with the `\|` operator and `RunnableLambda`; conditional routing based on LLM-classified sentiment |
+| 16 | [16.langchain_multi_turn_chatbot.py](part7_langchain/16.langchain_multi_turn_chatbot.py) | Multi-turn chatbot | How to maintain conversation history with `SystemMessage`, `HumanMessage`, `AIMessage` using LangChain + Groq instead of the raw OpenAI SDK |
+| 17 | [17.langchain_prompt_template.py](part7_langchain/17.langchain_prompt_template.py) | Prompt templates | How `PromptTemplate` separates prompt structure from data — define once, invoke with different inputs |
+| 18 | [18.langchain_output_parsers.py](part7_langchain/18.langchain_output_parsers.py) | Output parsers | Parsing raw LLM text into typed Python objects: `datetime`, `list`, Pydantic model, and `with_structured_output` |
+| 19 | [19.langchain_feedback_processing_system.py](part7_langchain/19.langchain_feedback_processing_system.py) | LCEL chains | Composing multi-step pipelines with the `\|` operator and `RunnableLambda`; conditional routing based on LLM-classified sentiment |
 
 ---
 
@@ -209,32 +209,56 @@ This makes it easy to understand any file at a glance without opening the full R
 
 ```
 .
-├── .env                        # Your API keys — never commit this
-├── .env.example                # Safe template — commit this, fill in .env from it
-├── .gitignore                  # Excludes .env, .venv/, __pycache__, IDE folders
-├── requirements.txt            # All dependencies
-├── README.md                   # This file
-├── 1.hello_world.py
-├── 2.model_list.py
-├── 3.print_completion_stats.py
-├── 4.sentiment_analyzer.py
-├── 5.multi_turn_chatbot.py
-├── 6.embedding_sample.py
-├── 7.submit_fine_tuning.py
-├── 8.use_fine_tuned_model.py
-├── 9.api_error_handling.py
-├── 10.ai_tweet_creator.py
-├── 11.ai_chat_support_system.py
-├── 12.embedding_similarity.py
-├── 13.bert_sample.py                          # Requires: NLTK downloads, transformers, torch
-├── 14.find_matching_jobs.py                   # Requires: job_title_des.csv or job_descriptions.csv
-├── 15.semantic_job_search_using_chromadb.py   # Requires: job_title_des.csv or job_descriptions.csv
-├── 16.langchain_multi_turn_chatbot.py         # Requires: GROQ_API_KEY in .env
-├── 17.langchain_prompt_template.py            # Requires: GROQ_API_KEY in .env
-├── 18.langchain_output_parsers.py             # Requires: GROQ_API_KEY in .env
-├── 19.langchain_feedback_processing_system.py # Requires: GROQ_API_KEY in .env
-├── training_set.jsonl          # Required for file 7 (fine-tuning) — not included
-└── validation_set.jsonl        # Required for file 7 (fine-tuning) — not included
+├── .env                          # Your API keys — never commit this
+├── .env.example                  # Safe template — commit this, fill in .env from it
+├── .gitignore
+├── requirements.txt
+├── Makefile
+├── README.md
+│
+├── part1_openai_basics/
+│   ├── README.md
+│   ├── 1.hello_world.py
+│   ├── 2.model_list.py
+│   ├── 3.print_completion_stats.py
+│   ├── 4.sentiment_analyzer.py
+│   └── 5.multi_turn_chatbot.py
+│
+├── part2_embeddings/
+│   ├── README.md
+│   ├── 6.embedding_sample.py
+│   └── 12.embedding_similarity.py
+│
+├── part3_fine_tuning/
+│   ├── README.md
+│   ├── 7.submit_fine_tuning.py
+│   ├── 8.use_fine_tuned_model.py
+│   ├── training_set.jsonl        # Not included — create your own
+│   └── validation_set.jsonl      # Not included — create your own
+│
+├── part4_error_handling/
+│   ├── README.md
+│   └── 9.api_error_handling.py
+│
+├── part5_practical_apps/
+│   ├── README.md
+│   ├── 10.ai_tweet_creator.py
+│   └── 11.ai_chat_support_system.py
+│
+├── part6_bert_local_nlp/
+│   ├── README.md
+│   ├── 13.bert_sample.py
+│   ├── 14.find_matching_jobs.py
+│   ├── 15.semantic_job_search_using_chromadb.py
+│   └── data/
+│       └── job_title_des.csv     # Sample dataset included
+│
+└── part7_langchain/
+    ├── README.md
+    ├── 16.langchain_multi_turn_chatbot.py
+    ├── 17.langchain_prompt_template.py
+    ├── 18.langchain_output_parsers.py
+    └── 19.langchain_feedback_processing_system.py
 ```
 
 ---
