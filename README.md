@@ -21,6 +21,10 @@ By the end of the current learning path you'll have hands-on experience with:
 | Generate BERT embeddings locally (no API key needed) | 13 |
 | Build a semantic job search engine | 14 |
 | Build a semantic job search engine with a vector database | 15 |
+| Build a multi-turn chatbot with LangChain and Groq | 16 |
+| Generate dynamic content using LangChain prompt templates | 17 |
+| Parse LLM output into typed Python objects | 18 |
+| Build a sentiment-routing feedback processing pipeline | 19 |
 
 ---
 
@@ -32,13 +36,14 @@ By the end of the current learning path you'll have hands-on experience with:
 - [x] **Part 4** — Error Handling & Robustness (file 9)
 - [x] **Part 5** — Practical Applications (files 10–11)
 - [x] **Part 6** — BERT & Local NLP (files 13–15)
-- [ ] **Part 7** — Function Calling & Tool Use
-- [ ] **Part 8** — Streaming Responses
-- [ ] **Part 9** — Structured Output (JSON mode, Pydantic)
-- [ ] **Part 10** — Vision & Multimodal (GPT-4o image input)
-- [ ] **Part 11** — Retrieval Augmented Generation (RAG with FAISS)
-- [ ] **Part 12** — Agents & LangGraph
-- [ ] **Part 13** — MCP (Model Context Protocol)
+- [x] **Part 7** — LangChain & Groq (files 16–19)
+- [ ] **Part 8** — Function Calling & Tool Use
+- [ ] **Part 9** — Streaming Responses
+- [ ] **Part 10** — Structured Output (JSON mode, Pydantic)
+- [ ] **Part 11** — Vision & Multimodal (GPT-4o image input)
+- [ ] **Part 12** — Retrieval Augmented Generation (RAG with FAISS)
+- [ ] **Part 13** — Agents & LangGraph
+- [ ] **Part 14** — MCP (Model Context Protocol)
 
 > Star the repo to get notified when new parts drop.
 
@@ -54,7 +59,8 @@ By the end of the current learning path you'll have hands-on experience with:
 ## Prerequisites
 
 - Python 3.9+
-- An [OpenAI API key](https://platform.openai.com/api-keys)
+- An [OpenAI API key](https://platform.openai.com/api-keys) — required for files 1–11
+- A [Groq API key](https://console.groq.com) — required for files 16–19 (free tier available)
 - Basic Python knowledge
 
 ---
@@ -160,6 +166,15 @@ The scripts are numbered in the order they should be studied. Each one introduce
 | 14 | [14.find_matching_jobs.py](14.find_matching_jobs.py) | Semantic search | Building a semantic job search engine: pre-computing BERT embeddings for a dataset and ranking results by cosine similarity |
 | 15 | [15.semantic_job_search_using_chromadb.py](15.semantic_job_search_using_chromadb.py) | Vector database | Replacing the manual BERT + cosine loop with ChromaDB: auto-embedding via SentenceTransformer, HNSW index for fast search, and metadata-aware querying |
 
+### Part 7 — LangChain & Groq
+
+| # | File | Concept | Key Takeaway |
+|---|------|---------|--------------|
+| 16 | [16.langchain_multi_turn_chatbot.py](16.langchain_multi_turn_chatbot.py) | Multi-turn chatbot | How to maintain conversation history with `SystemMessage`, `HumanMessage`, `AIMessage` using LangChain + Groq instead of the raw OpenAI SDK |
+| 17 | [17.langchain_prompt_template.py](17.langchain_prompt_template.py) | Prompt templates | How `PromptTemplate` separates prompt structure from data — define once, invoke with different inputs |
+| 18 | [18.langchain_output_parsers.py](18.langchain_output_parsers.py) | Output parsers | Parsing raw LLM text into typed Python objects: `datetime`, `list`, Pydantic model, and `with_structured_output` |
+| 19 | [19.langchain_feedback_processing_system.py](19.langchain_feedback_processing_system.py) | LCEL chains | Composing multi-step pipelines with the `\|` operator and `RunnableLambda`; conditional routing based on LLM-classified sentiment |
+
 ---
 
 ## Adding a New Script
@@ -214,6 +229,10 @@ This makes it easy to understand any file at a glance without opening the full R
 ├── 13.bert_sample.py                          # Requires: NLTK downloads, transformers, torch
 ├── 14.find_matching_jobs.py                   # Requires: job_title_des.csv or job_descriptions.csv
 ├── 15.semantic_job_search_using_chromadb.py   # Requires: job_title_des.csv or job_descriptions.csv
+├── 16.langchain_multi_turn_chatbot.py         # Requires: GROQ_API_KEY in .env
+├── 17.langchain_prompt_template.py            # Requires: GROQ_API_KEY in .env
+├── 18.langchain_output_parsers.py             # Requires: GROQ_API_KEY in .env
+├── 19.langchain_feedback_processing_system.py # Requires: GROQ_API_KEY in .env
 ├── training_set.jsonl          # Required for file 7 (fine-tuning) — not included
 └── validation_set.jsonl        # Required for file 7 (fine-tuning) — not included
 ```
@@ -237,6 +256,11 @@ See [requirements.txt](requirements.txt) for the full list. Key packages:
 | `torch` | PyTorch backend for BERT inference (files 13, 14) |
 | `chromadb` | Vector database for storing and querying embeddings (file 15) |
 | `sentence-transformers` | Lightweight sentence embedding model via ChromaDB (file 15) |
+| `langchain` | Core LangChain framework — chains, prompts, message types (files 16–19) |
+| `langchain-core` | Base abstractions — `PromptTemplate`, `StrOutputParser`, `RunnableLambda` (files 16–19) |
+| `langchain-groq` | `ChatGroq` integration for Groq-hosted LLMs (files 16–19) |
+| `langchain-community` | Third-party output parsers and integrations (file 18) |
+| `langchain-classic` | Legacy output parsers — `DatetimeOutputParser`, `PydanticOutputParser` (file 18) |
 
 ---
 
@@ -246,5 +270,7 @@ See [requirements.txt](requirements.txt) for the full list. Key packages:
 - Files 13 and 14 require NLTK data to be downloaded first — see the [NLTK Data](#nltk-data-required-for-files-13-and-14) section above. File 15 does not require NLTK.
 - Files 14 and 15 require a CSV file (`job_title_des.csv` or `job_descriptions.csv`) with columns `Job Title` and `Job Description`.
 - File 15 uses `chromadb.EphemeralClient()` — the collection is in-memory and is rebuilt on every run. To persist embeddings across runs, switch to `chromadb.PersistentClient(path="./chroma_db")`.
+- Files 16–19 use the **Groq API** instead of OpenAI — get a free key at [console.groq.com](https://console.groq.com). Add `GROQ_API_KEY=your_key` to your `.env` file.
+- Files 16–19 do not require any local model downloads — inference runs on Groq's hosted infrastructure.
 - Files 7 and 8 require `training_set.jsonl` and `validation_set.jsonl` for fine-tuning. These are not included in the repo as they are user-specific training data.
 - Files 7 and 8 are meant to be run in sequence. File 7 sets `FINE_TUNING_JOB_ID` in the current process environment. If you run file 8 in a new terminal session, add `FINE_TUNING_JOB_ID=<your-job-id>` to your `.env` file manually so it persists.
