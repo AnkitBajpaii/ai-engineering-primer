@@ -25,6 +25,7 @@ By the end of the current learning path you'll have hands-on experience with:
 | Generate dynamic content using LangChain prompt templates | 17 |
 | Parse LLM output into typed Python objects | 18 |
 | Build a sentiment-routing feedback processing pipeline | 19 |
+| Bind custom tools to an LLM and invoke them manually | 20 |
 
 ---
 
@@ -36,7 +37,7 @@ By the end of the current learning path you'll have hands-on experience with:
 - [x] **Part 4** — Error Handling & Robustness (file 9)
 - [x] **Part 5** — Practical Applications (files 10–11)
 - [x] **Part 6** — BERT & Local NLP (files 13–15)
-- [x] **Part 7** — LangChain & Groq (files 16–19)
+- [x] **Part 7** — LangChain & Groq (files 16–20)
 - [ ] **Part 8** — Function Calling & Tool Use
 - [ ] **Part 9** — Streaming Responses
 - [ ] **Part 10** — Structured Output (JSON mode, Pydantic)
@@ -174,6 +175,7 @@ The scripts are numbered in the order they should be studied. Each one introduce
 | 17 | [17.langchain_prompt_template.py](part7_langchain/17.langchain_prompt_template.py) | Prompt templates | How `PromptTemplate` separates prompt structure from data — define once, invoke with different inputs |
 | 18 | [18.langchain_output_parsers.py](part7_langchain/18.langchain_output_parsers.py) | Output parsers | Parsing raw LLM text into typed Python objects: `datetime`, `list`, Pydantic model, and `with_structured_output` |
 | 19 | [19.langchain_feedback_processing_system.py](part7_langchain/19.langchain_feedback_processing_system.py) | LCEL chains | Composing multi-step pipelines with the `\|` operator and `RunnableLambda`; conditional routing based on LLM-classified sentiment |
+| 20 | [20.langchain_tool_calling.py](part7_langchain/20.langchain_tool_calling.py) | Tool calling | Defining tools with `@tool`, binding them to an LLM with `bind_tools`, and the two-step manual flow: LLM decides → you execute |
 
 ---
 
@@ -258,7 +260,8 @@ This makes it easy to understand any file at a glance without opening the full R
     ├── 16.langchain_multi_turn_chatbot.py
     ├── 17.langchain_prompt_template.py
     ├── 18.langchain_output_parsers.py
-    └── 19.langchain_feedback_processing_system.py
+    ├── 19.langchain_feedback_processing_system.py
+    └── 20.langchain_tool_calling.py
 ```
 
 ---
