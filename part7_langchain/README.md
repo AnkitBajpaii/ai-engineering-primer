@@ -11,6 +11,7 @@ Learn the LangChain framework: prompt templates, output parsers, multi-turn chat
 | 18 | [18.langchain_output_parsers.py](18.langchain_output_parsers.py) | Parse LLM output into `datetime`, `list`, and Pydantic objects |
 | 19 | [19.langchain_feedback_processing_system.py](19.langchain_feedback_processing_system.py) | Multi-step LCEL pipeline with sentiment-based routing |
 | 20 | [20.langchain_tool_calling.py](20.langchain_tool_calling.py) | Define tools with `@tool`, bind to LLM, manual two-step tool calling flow |
+| 21 | [21.langchain_embedding.py](21.langchain_embedding.py) | Embed documents with `OpenAIEmbeddings`, store in `InMemoryVectorStore`, semantic similarity search |
 
 ## Prerequisites
 
@@ -25,6 +26,7 @@ make run n=17
 make run n=18
 make run n=19
 make run n=20
+make run n=21
 ```
 
 > For file 18, uncomment individual function calls in `__main__` to run each output parser example separately.
