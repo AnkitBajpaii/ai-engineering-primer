@@ -2,6 +2,16 @@
 
 Learn how to generate embeddings and build a semantic search engine locally using open-source models — no API key required.
 
+## Background
+
+Not every AI task needs a cloud API. **BERT** (Bidirectional Encoder Representations from Transformers) is an open-source model from Google that runs entirely on your own hardware — no API key, no internet connection, no per-call cost. The trade-off is a one-time model download (~440MB) and the need to manage the model locally.
+
+BERT is *bidirectional* — when processing a word, it looks at both the words before and after it simultaneously. This gives it a richer understanding of context than earlier models that only read left-to-right. The `[CLS]` token (short for "classification") sits at the start of every BERT input; its output vector from the last layer represents the meaning of the entire sentence and is used as the embedding.
+
+**Classic NLP preprocessing** (tokenisation → stop word removal → lemmatisation) was essential for older models that couldn't handle noise. BERT reduced this need significantly — but raw BERT still benefits from clean input. **SentenceTransformer** (used in file 15) is a fine-tuned variant of BERT trained specifically on sentence-pair similarity tasks; it handles full sentences as-is, making preprocessing unnecessary and even counterproductive.
+
+A **vector database** like ChromaDB goes far beyond a manual cosine similarity loop. It indexes vectors using an algorithm called HNSW (Hierarchical Navigable Small World), which allows approximate nearest-neighbour search in sub-millisecond time even across millions of documents. You insert documents once; querying is fast at any scale. This is the architecture behind production semantic search and RAG (Retrieval-Augmented Generation) systems.
+
 ## Scripts
 
 | # | File | Concept |

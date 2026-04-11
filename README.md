@@ -53,7 +53,7 @@ By the end of the current learning path you'll have hands-on experience with:
 
 ## Who this is for
 
-- **Yourself (future reference):** Each script is self-contained. Skim the file header and the code to quickly recall the concept.
+- **Myself (future reference):** Each script is self-contained. Skim the file header and the code to quickly recall the concept.
 - **Other developers:** Follow the numbered files in order — each one introduces one new concept on top of the last.
 
 ---

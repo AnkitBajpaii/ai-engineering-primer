@@ -2,6 +2,16 @@
 
 Learn how to generate text embeddings with the OpenAI API and compare vectors using different similarity metrics.
 
+## Background
+
+Text is strings — but math works on numbers. An **embedding** converts a piece of text into a fixed-length array of floating-point numbers (a *vector*) that captures its meaning. Words or phrases with similar meanings end up as vectors that point in similar directions in high-dimensional space — "dog" and "puppy" will be close; "dog" and "invoice" will be far apart.
+
+This numeric representation unlocks powerful capabilities that pure string matching can't do: you can measure how similar two pieces of text are, find documents that match a query even with no words in common, cluster related content, and power recommendation systems — all using basic linear algebra.
+
+**Cosine similarity** is the standard metric for comparing text embeddings. It measures the *angle* between two vectors, not the distance between their tips. A score of `1.0` means the vectors point in exactly the same direction (same meaning); `0.0` means perpendicular (unrelated). Cosine is preferred over raw euclidean distance because longer documents produce larger vectors — cosine normalises that out, so a short tweet and a long article on the same topic still score as similar.
+
+The embeddings in this folder come from OpenAI's `text-embedding-3-small` model, which maps any text input into a 1536-dimensional vector. You never see or manipulate those 1536 numbers directly — you just compare them.
+
 ## Scripts
 
 | # | File | Concept |

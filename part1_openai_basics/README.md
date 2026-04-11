@@ -2,6 +2,16 @@
 
 Learn how to make your first API calls, inspect model metadata, and build a multi-turn chatbot using the OpenAI SDK.
 
+## Background
+
+An **LLM (Large Language Model)** is a neural network trained on enormous amounts of text. It doesn't retrieve facts from a database — it predicts the most likely next token given everything before it. The OpenAI API gives you access to these models without running any hardware yourself; you send a request and get a response back.
+
+Every request is **stateless** — the model has no memory of previous conversations. That's why you pass the entire conversation history on every call. Managing that history is your responsibility as the developer.
+
+The core building block is the **chat completion**: you send a list of messages and the model generates the next assistant message. There are three message roles: `system` (sets the model's persona and constraints — the model treats this as standing instructions), `user` (the human's input), and `assistant` (the model's previous replies, included to give it context).
+
+**Tokens** are the unit of text the model processes — roughly 3–4 characters each, or about ¾ of a word. You pay per token, and models have a maximum context window (e.g. 128k tokens for GPT-4o). A prompt that grows too large gets truncated or rejected, and costs accumulate fast — understanding tokens early saves you from surprises in production.
+
 ## Scripts
 
 | # | File | Concept |

@@ -2,6 +2,16 @@
 
 Build real-world tools: a style-controlled content generator and a domain-specific support chatbot.
 
+## Background
+
+These two scripts demonstrate two foundational patterns that show up in almost every real AI product.
+
+**Temperature** controls how deterministic vs. creative the model is. Internally, the model produces a probability distribution over possible next tokens. At `temperature=0.0` it always picks the highest-probability token — output is consistent and predictable but can feel repetitive. At `temperature=1.0` it samples from that distribution — output varies run-to-run and feels more natural. Above `1.0` it starts sampling from unlikely tokens — useful for brainstorming, risky for factual tasks. Most production apps run between `0.2` and `0.7`.
+
+**Few-shot prompting** means giving the model examples *inside the prompt* so it learns the desired style or format from demonstration rather than explicit instruction. It's faster and cheaper than fine-tuning for style transfer — no training required, just well-chosen examples. The tweet generator uses this: pass a handful of sample tweets, ask for one more in the same style.
+
+**System prompt as a knowledge base** is a lightweight alternative to building a full retrieval pipeline. You embed a FAQ, ruleset, or product catalogue directly in the system message, scoping the model's answers to that domain. It works well when your knowledge fits in the context window (a few pages of text). For larger knowledge bases you need retrieval — see Parts 6 and 7.
+
 ## Scripts
 
 | # | File | Concept |

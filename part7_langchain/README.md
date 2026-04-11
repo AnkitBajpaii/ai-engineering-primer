@@ -2,6 +2,16 @@
 
 Learn the LangChain framework: prompt templates, output parsers, multi-turn chat, composing multi-step pipelines with LCEL, tool calling, and vector search.
 
+## Background
+
+Raw API calls work, but as AI applications grow they accumulate boilerplate: retry logic, prompt templates, output parsing, memory management, tool wiring. **LangChain** is a framework that abstracts these patterns so you can focus on application logic instead of plumbing. It also provides a common interface across different LLM providers (OpenAI, Groq, Anthropic, etc.) — you can swap the underlying model without rewriting your application code.
+
+**LCEL (LangChain Expression Language)** is the core composition primitive. The `|` pipe operator chains steps — `PromptTemplate | LLM | OutputParser` — the same way Unix pipes chain commands. Each component knows how to pass its output to the next. This makes multi-step pipelines readable, testable in pieces, and easy to modify.
+
+**Output parsers** bridge the gap between LLM text responses and typed Python objects. LLMs always return text — but your application wants a `datetime`, a `list`, or a Pydantic model. Parsers inject format instructions into the prompt and then convert the raw text response into the type you need. `with_structured_output` is the modern alternative: it instructs the LLM to return JSON directly, which is more reliable for complex types.
+
+**Tool calling** is how you give an LLM the ability to act — call an API, run a calculation, query a database. The model doesn't call the tool itself; it returns a structured description of the call it wants to make. Your code executes the actual function and passes the result back. This two-step loop — *decide → execute → observe* — is the foundation of every LLM agent. Files 16–20 cover the building blocks manually; a full agent framework (like LangGraph) automates the loop.
+
 ## Scripts
 
 | # | File | Concept |

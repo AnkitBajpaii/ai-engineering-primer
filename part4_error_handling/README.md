@@ -2,6 +2,18 @@
 
 Learn how to catch and handle OpenAI API errors gracefully with proper exception ordering and retry logic.
 
+## Background
+
+APIs fail. Networks drop, rate limits get hit, servers return 500s. Production AI code that doesn't handle errors will crash in front of users at the worst possible time.
+
+The OpenAI SDK maps HTTP status codes to typed Python exceptions so you can handle each failure mode differently:
+
+- **`RateLimitError` (HTTP 429):** You've hit your API quota or requests-per-minute ceiling. The correct response is *exponential backoff* — wait a few seconds, retry, wait longer if it fails again. Don't hammer the API in a tight loop.
+- **`APIConnectionError`:** A network-level failure — no internet, DNS timeout, connection refused. No point retrying immediately; log the error and tell the user to check their connection.
+- **`APIError`:** A catch-all for other server-side errors (500s, unexpected responses). Log it and surface it; these usually resolve on their own.
+
+**Exception order matters** in Python's `except` chain. Python evaluates handlers top-to-bottom and stops at the first match. `RateLimitError` is a subclass of `APIError` — if you put `APIError` first, it catches everything and your specific handlers never run. Always catch the *most specific* exception first, the most *general* last.
+
 ## Scripts
 
 | # | File | Concept |

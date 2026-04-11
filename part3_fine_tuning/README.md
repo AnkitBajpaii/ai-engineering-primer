@@ -2,6 +2,20 @@
 
 Learn how to prepare a JSONL training dataset, upload it to OpenAI, and submit and use a fine-tuned model.
 
+## Background
+
+A pre-trained LLM is a generalist — it can do almost anything but excels at nothing specific. **Fine-tuning** takes that base model and continues training it on your own curated examples, nudging the model's weights toward the style, format, or domain expertise you need.
+
+Think of it as the difference between hiring a new graduate (base model) and training them on how your company specifically writes customer emails (fine-tuned model). After fine-tuning, the model produces your format consistently without needing long instructions in every prompt — the behaviour is baked in.
+
+**Fine-tuning is not always the right tool.** It is expensive to set up (training costs money and time), the dataset must be carefully prepared, and you can't update the model's knowledge after training is complete. For most tasks, a well-crafted system prompt gets you 80% of the way there in minutes. Consider fine-tuning when:
+
+- You need very consistent output format and prompting alone isn't reliable enough
+- Your prompts are getting very long because you keep repeating the same instructions
+- Latency or cost of long prompts is a bottleneck in production
+
+The training data format is **JSONL** — one JSON object per line, each containing a `messages` array with `system`, `user`, and `assistant` turns representing an ideal example interaction.
+
 ## Scripts
 
 | # | File | Concept |
