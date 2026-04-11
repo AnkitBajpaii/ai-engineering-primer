@@ -9,6 +9,7 @@
 ##
 from dotenv import load_dotenv
 from openai import OpenAI
+from datetime import datetime
 
 load_dotenv()
 
@@ -18,8 +19,10 @@ model_list = client.models.list()
 
 print(f"Total models available: {len(model_list.data)}")
 
-for model in model_list.data:
-    print(model.id)
+print(f"model id\tcreated date")
+for model in sorted(model_list.data, key=lambda m: m.created, reverse=True):
+    created = datetime.fromtimestamp(model.created).strftime("%Y-%m-%d")
+    print(f"{model.id}\t{created}")
 
 ##
 ## Expected output (actual list depends on your API key access):
@@ -37,4 +40,3 @@ for model in model_list.data:
 ##   2. Sort the model list alphabetically before printing
 ##   3. Count how many models are embedding models vs chat models
 ##   4. Print each model's `created` timestamp alongside its ID to see which are newest
-##

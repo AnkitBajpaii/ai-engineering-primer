@@ -23,10 +23,8 @@ messages = [
     {"role" : "user", "content" : "Translate the following English text to Hindi: 'Hello, how are you?'"}
 ]
 
-model="gpt-4.1-mini"
-
 completion = client.chat.completions.create(
-    model=model,
+    model="gpt-4.1-mini",
     messages=messages
 )
 
