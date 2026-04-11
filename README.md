@@ -1,6 +1,6 @@
-# AI Engineering Playground — A Hands-On Learning Path
+# AI Engineering Primer — A Hands-On Learning Path
 
-A structured, step-by-step collection of Python scripts for learning AI engineering — from your first OpenAI API call through embeddings, fine-tuning, BERT-based NLP, and beyond. Each file introduces one focused concept, making this ideal as a personal reference or a guided learning resource for other developers.
+A structured, growing collection of Python scripts for learning AI engineering — from your first OpenAI API call through embeddings, fine-tuning, BERT-based NLP, and beyond. Each script introduces one focused concept, with every section explaining the *why* before the *what*. Ideal as a personal reference or a guided learning path for other developers.
 
 ---
 
@@ -72,8 +72,8 @@ By the end of the current learning path you'll have hands-on experience with:
 **Option A — one command (recommended):**
 
 ```bash
-git clone https://github.com/AnkitBajpaii/ai-engineering-playground.git
-cd ai-engineering-playground
+git clone https://github.com/AnkitBajpaii/ai-engineering-primer.git
+cd ai-engineering-primer
 make setup
 # Open .env and add your OPENAI_API_KEY, then:
 make run n=1
@@ -83,8 +83,8 @@ make run n=1
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/AnkitBajpaii/ai-engineering-playground.git
-cd ai-engineering-playground
+git clone https://github.com/AnkitBajpaii/ai-engineering-primer.git
+cd ai-engineering-primer
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
