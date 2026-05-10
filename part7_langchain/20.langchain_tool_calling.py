@@ -55,9 +55,15 @@ def calculate_discount(price: float, discount_percentage: float) -> float:
 
 llm = ChatGroq(model="llama-3.1-8b-instant")
 
+# Build a name → tool registry from the same list we bind, so the dispatch
+# names can't drift from what the LLM is told about. tool.name matches the
+# string the LLM returns in tool_call["name"].
+tools = [calculate_discount]
+tools_by_name = {t.name: t for t in tools}
+
 # bind_tools tells the LLM about the available tools and their signatures.
 # The LLM does NOT call them — it only learns what tools exist and what they do.
-llm_with_tools = llm.bind_tools([calculate_discount])
+llm_with_tools = llm.bind_tools(tools)
 
 # When the prompt doesn't require a tool, the LLM responds normally with text.
 response = llm_with_tools.invoke("Hello World")
@@ -73,9 +79,15 @@ print(f"Content: {result.content}")        # → "" (empty — model chose to ca
 print(f"Tool calls: {result.tool_calls}")  # → [{"name": "calculate_discount", "args": {...}}]
 
 # Step 2: You execute the tool manually using the args the LLM decided on.
+# Look the tool up by name from the registry instead of hard-coding it — this
+# is what lets you bind multiple tools and let the LLM pick the right one.
+# Looping over tool_calls also handles the case where the LLM requests more
+# than one call in a single response.
 # In an agent pattern (future topic) this step is handled automatically in a loop.
-final_price = calculate_discount.invoke(result.tool_calls[0]["args"])
-print(f"Final price: ${final_price:.2f}")
+for tool_call in result.tool_calls:
+    selected_tool = tools_by_name[tool_call["name"]]
+    output = selected_tool.invoke(tool_call["args"])
+    print(f"{tool_call['name']} → {output:.2f}")
 
 ##
 ## Expected output:
@@ -84,14 +96,15 @@ print(f"Final price: ${final_price:.2f}")
 ##
 ##   Content:
 ##   Tool calls: [{'name': 'calculate_discount', 'args': {'price': 100.0, 'discount_percentage': 20.0}, 'id': '...', 'type': 'tool_call'}]
-##   Final price: $80.00
+##   calculate_discount → 80.00
 ##
 ## Challenges:
 ##   1. Add a second tool (e.g. calculate_tax) and bind both to the LLM — observe how the
-##      LLM picks the right tool based on the prompt
+##      LLM picks the right tool based on the prompt. The dispatch loop already handles
+##      this: tools_by_name will pick up the new tool automatically.
 ##   2. Try a prompt that doesn't need a tool (e.g. "What is the capital of France?") and
 ##      confirm that tool_calls is empty and content has the answer
 ##   3. Pass an invalid discount (e.g. 150) and observe the ValueError raised in step 2
-##   4. Print result.tool_calls[0]["name"] to see how you would dynamically dispatch to
-##      the correct tool when multiple tools are bound
+##   4. Try a prompt that triggers two tool calls in one response (e.g. "Apply 20% off to
+##      $100 and 10% off to $50") and confirm the loop runs both
 ##
