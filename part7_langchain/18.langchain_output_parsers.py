@@ -69,7 +69,7 @@ def PydanticOutputParserExample():
       partial_variables={"format_instructions": parser.get_format_instructions()},
       )
 
-    prompt_value = prompt_pydantic.invoke({"question": "Generate the books written by James Clear"})
+    prompt_value = prompt_pydantic.invoke({"question": "Generate the books written by Indian Author Munshi Premchand"})
 
     response = llm.invoke(prompt_value)
 
@@ -87,9 +87,9 @@ def StructuredLlmExample():
 
     structured_llm = llm.with_structured_output(Author)
 
-    # A tiny nudge in the prompt helps many models obey types without extra code.
+    # A tiny change in the prompt helps many models obey types without extra code.
     returned_object = structured_llm.invoke(
-        "Generate the books written by James Clear."
+        "Generate the books written by Indian Author Munshi Premchand."
         "Return 'number' as an integer (not a string) and 'books' as a JSON array of strings (not a quoted string)."
     )
 
