@@ -127,7 +127,7 @@ load_dotenv()
 
 client = OpenAI()
 
-def chat_with_bot(question, training_data):
+def chat_with_bot(question):
 
     response = client.chat.completions.create(
         model="gpt-4.1-mini",
@@ -153,7 +153,7 @@ def main():
         if user_question.lower() in ["exit", "quit", "bye"]:
             print("Chatbot: Goodbye! Have a great day!")
             break
-        answer = chat_with_bot(user_question, training_data)
+        answer = chat_with_bot(user_question)
         print(f"Chatbot: {answer}\n")
         
 if __name__ == "__main__":
