@@ -12,7 +12,7 @@
 ## Note: Uses meta-llama/llama-4-scout-17b-16e-instruct via Groq API. No OpenAI key required.
 ## Run: python 17.langchain_prompt_template.py
 ##
-from langchain.messages import SystemMessage, HumanMessage, AIMessage
+
 from langchain_core.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
